@@ -66,7 +66,9 @@ bool Labirynt::SetStartAndFinish(const Vector<uint>& start, const Vector<uint>& 
 {
 	ClearPath();
 	this->finish = finish;
-	return SeekStep(start.x, start.y);
+	bool result = SeekStep(start.x, start.y);
+	std::cout << "[RESULT] The path " << (result ? "was" : "was not") << " found. Steps: " << moveCounter << std::endl;
+	return result;
 }
 
 bool Labirynt::SeekStep(uint x, uint y)

@@ -7,7 +7,6 @@ App::App() : offsetX(0), offsetY(0), scale(1), labirynt(), startPoint(), endPoin
 
 App::~App()
 {
-
 }
 
 App::Point::Point() : position({ 0, 0 }), visible(false)
@@ -20,7 +19,7 @@ bool App::OnUserCreate()
 	offsetY = 3;
 	scale = 3;
 
-	labirynt.LoadFromFile("testlab2.txt");
+	labirynt.LoadFromFile("labirynt1.txt");
 
 	return true;
 }
