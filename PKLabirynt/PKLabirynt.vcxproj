@@ -139,7 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Labirynt.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\Labirynt.h" />
+    <ClInclude Include="src\olcPixelGameEngine.h" />
+    <ClInclude Include="src\util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\labirynt1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
