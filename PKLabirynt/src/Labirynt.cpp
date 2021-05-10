@@ -1,6 +1,6 @@
 #include "Labirynt.h"
 
-Labirynt::Labirynt() : data(nullptr), width(0), height(0)
+Labirynt::Labirynt() : data(nullptr), width(0), height(0), moveCounter(0), sc({ 0, 0 }), finish({ 0, 0 })
 {
 }
 
@@ -60,6 +60,60 @@ uint Labirynt::GetWidth() const
 uint Labirynt::GetHeight() const
 {
 	return height;
+}
+
+bool Labirynt::SetStartAndFinish(const Vector<uint>& start, const Vector<uint>& finish)
+{
+	ClearPath();
+	this->finish = finish;
+	return SeekStep(start.x, start.y);
+}
+
+bool Labirynt::SeekStep(uint x, uint y)
+{
+	moveCounter++;
+	data[x][y] = '+';
+
+	if (x == finish.x && y == finish.y) return true;
+
+	if (GetData(x + 1, y) == '1')
+	{
+		if (SeekStep(x + 1, y)) return true;
+	}
+
+	if (GetData(x, y + 1) == '1')
+	{
+		if (SeekStep(x, y + 1)) return true;
+	}
+
+	if (GetData(x - 1, y) == '1')
+	{
+		if (SeekStep(x - 1, y)) return true;
+	}
+
+	if (GetData(x, y - 1) == '1')
+	{
+		if (SeekStep(x, y - 1)) return true;
+	}
+
+	data[x][y] = '-';
+	return false;
+}
+
+void Labirynt::ClearPath()
+{
+	for (int j = 0; j < height; j++)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			if (data[i][j] == '+' || data[i][j] == '-')
+			{
+				data[i][j] = '1';
+			}
+		}
+	}
+
+	moveCounter = 0;
 }
 
 std::pair<bool, Vector<uint>> Labirynt::VerifyFileSyntax(std::ifstream& ifile)

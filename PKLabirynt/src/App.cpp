@@ -20,8 +20,7 @@ bool App::OnUserCreate()
 	offsetY = 3;
 	scale = 3;
 
-	labirynt.LoadFromFile("testlab1.txt");
-
+	labirynt.LoadFromFile("testlab2.txt");
 
 	return true;
 }
@@ -32,7 +31,6 @@ bool App::OnUserUpdate(float fElapsedTime)
 	DrawLabirynt();
 	HandleInput();
 	DrawPoints();
-
 	return true;
 }
 
@@ -118,6 +116,10 @@ void App::HandleInput()
 		{
 			startPoint.position = labCoordsLastClick;
 			startPoint.visible = true;
+			if (endPoint.visible == true)
+			{
+				labirynt.SetStartAndFinish(startPoint.position, endPoint.position);
+			}
 		}
 	}
 
@@ -128,6 +130,10 @@ void App::HandleInput()
 		{
 			endPoint.position = labCoordsLastClick;
 			endPoint.visible = true;
+			if (startPoint.visible == true)
+			{
+				labirynt.SetStartAndFinish(startPoint.position, endPoint.position);
+			}
 		}
 	}
 }
