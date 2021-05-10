@@ -40,8 +40,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\labirynt1.txt">
+    <Text Include="labirynt1.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="testlab1.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="labirynt2.txt" />
   </ItemGroup>
 </Project>

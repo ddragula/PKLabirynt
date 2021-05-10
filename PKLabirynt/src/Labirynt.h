@@ -1,20 +1,23 @@
 #pragma once
 #include <string>
-#include "util.h"
 #include <fstream>
+#include <iostream>
+#include "util.h"
 
 class Labirynt
 {
 private:
 	char** data;
-	Vector<uint> dimension;
+	uint width;
+	uint height;
 public:
 	Labirynt();
 	~Labirynt();
 	void LoadFromFile(const std::string& filename);
-	char** GetData() const;
-	Vector<uint> GetDimension() const;
+	char GetData(uint x, uint y) const;
+	uint GetWidth() const;
+	uint GetHeight() const;
 private:
-	std::pair<bool, Vector<uint>> VerifyFileSyntax(const std::ifstream& ifile);
-	void FetchDataFromFile(const std::ifstream& ifile, char**& refData);
+	std::pair<bool, Vector<uint>> VerifyFileSyntax(std::ifstream& ifile);
+	void FetchDataFromFile(std::ifstream& ifile, char**& refData);
 };

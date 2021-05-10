@@ -4,7 +4,7 @@
 int main()
 {
 	App labiryntApp;
-	if (labiryntApp.Construct(60, 60, 8, 8))
+	if (labiryntApp.Construct(100, 100, 8, 8))
 	{
 		labiryntApp.Start();
 	}
