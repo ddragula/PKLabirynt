@@ -18,9 +18,9 @@ bool App::OnUserCreate()
 {
 	offsetX = 3;
 	offsetY = 3;
-	scale = 5;
+	scale = 3;
 
-	labirynt.LoadFromFile("labirynt1.txt");
+	labirynt.LoadFromFile("testlab1.txt");
 
 
 	return true;
@@ -28,11 +28,10 @@ bool App::OnUserCreate()
 
 bool App::OnUserUpdate(float fElapsedTime)
 {
+	Clear(olc::Pixel(0, 0, 0));
 	DrawLabirynt();
 	HandleInput();
 	DrawPoints();
-
-
 
 	return true;
 }
@@ -43,21 +42,42 @@ void App::DrawLabirynt()
 	{
 		for (int j = 0; j < labirynt.GetHeight(); j++)
 		{
+			bool walls;
 			olc::Pixel px;
 			switch (labirynt.GetData(i, j))
 			{
 			case '0':
 				px = olc::Pixel(255, 255, 255);
+				walls = true;
+				break;
+			case '+':
+				px = olc::Pixel(255, 255, 0);
+				walls = false;
+				break;
+			case '-':
+				px = olc::Pixel(50, 50, 50);
+				walls = false;
 				break;
 			default:
 				px = olc::Pixel(0, 0, 0);
+				walls = true;
 			}
 
 			for (int k = 0; k < scale; k++)
 			{
 				for (int l = 0; l < scale; l++)
 				{
-					Draw(i * scale + k + offsetX, j * scale + l + offsetY, px);
+					if (!walls)
+					{
+						if (k == scale / 2 && l == scale / 2)
+						{
+							Draw(i * scale + k + offsetX, j * scale + l + offsetY, px);
+						}
+					}
+					else
+					{
+						Draw(i * scale + k + offsetX, j * scale + l + offsetY, px);
+					}
 				}
 			}
 		}
@@ -94,7 +114,7 @@ void App::HandleInput()
 	if (GetMouse(0).bHeld)
 	{
 		labCoordsLastClick = { (GetMouseX() - offsetX) / scale, (GetMouseY() - offsetY) / scale };
-		if (labirynt.GetData(labCoordsLastClick.x, labCoordsLastClick.y) == '1')
+		if (labirynt.GetData(labCoordsLastClick.x, labCoordsLastClick.y) != '0')
 		{
 			startPoint.position = labCoordsLastClick;
 			startPoint.visible = true;
@@ -104,7 +124,7 @@ void App::HandleInput()
 	if (GetMouse(1).bHeld)
 	{
 		labCoordsLastClick = { (GetMouseX() - offsetX) / scale, (GetMouseY() - offsetY) / scale };
-		if (labirynt.GetData(labCoordsLastClick.x, labCoordsLastClick.y) == '1')
+		if (labirynt.GetData(labCoordsLastClick.x, labCoordsLastClick.y) != '0')
 		{
 			endPoint.position = labCoordsLastClick;
 			endPoint.visible = true;

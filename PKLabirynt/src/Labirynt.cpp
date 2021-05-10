@@ -46,7 +46,7 @@ void Labirynt::LoadFromFile(const std::string &filename)
 char Labirynt::GetData(uint x, uint y) const
 {
 	if (x > width - 1 || y > height - 1) {
-		return 0;
+		return '0';
 	}
 
 	return data[x][y];
