@@ -1,2 +1,2 @@
 # PKLabirynt
-Improved Lab for Studies 
+Improved Lab for Studies - JPiA2 Lab nr 10
